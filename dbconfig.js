@@ -1,8 +1,8 @@
 const config = {
     user: 'sa',
     password: 'sa',
-    server: '10.13.128.28',
-    database: 'accounts',
+    server: '192.168.1.2',
+    database: 'Student_Management',
     options: {
         trustedConnection: true,
         encrypt: true,

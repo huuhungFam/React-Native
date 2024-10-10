@@ -71,6 +71,7 @@ router.route('/student').delete((req, res)=> {
     })
 })
 
+
 router.route('/student/login').post(async (req, res) => {
     try {
         let userInsert = { ...req.body };  // Correct 'req' instead of 'request'
@@ -78,7 +79,7 @@ router.route('/student/login').post(async (req, res) => {
 
         if (result.length > 0) {
             const account = result[0];  // Get the first user (if any)
-            const match = (req.body.password === (account.password));  // Await bcrypt comparison
+            const match = (req.body.password === (account.Password));  // Await bcrypt comparison
 
             if (match) {
                 res.status(201).json({
@@ -100,15 +101,6 @@ router.route('/student/login').post(async (req, res) => {
 
     }});
 
-
-// router.route('/student/signup').post((req, res) => {
-//     const userInput = {...req.body}
-//     dboperation.signUp(userInput).then((result) => {
-//         res.status(201).send({
-//             message: 'Signed up'
-//         })
-//     })
-// })
 
 router.route('/student/signup').post((req, res) => {
     const userInput = { ...req.body };
@@ -134,12 +126,17 @@ router.route('/student/signup').post((req, res) => {
         });
 });
 
+
 router.route('/student/dropOut').delete((req, res) => {
-    const negavInput = {...req.body}
-    dboperation.deleteAccount(negavInput).then((result)=> {
-        res.status(201).send({
-            message: 'Bạn đã thành Negav'
-        })
+    // const negavInput = {...req.body}
+    const name = req.query.Username
+    dboperation.deleteAccount(name).then((result)=> {
+        // res.status(201).send({
+        //     message: 'Bạn đã thành Negav'
+        // })
+        console.log(name)
+        res.json({ success: true, message: 'Account deleted successfully' })
+        console.log('XOAS TAIF KHOANR')
     })
 })
 
